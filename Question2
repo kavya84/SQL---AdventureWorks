@@ -1,0 +1,27 @@
+a.Write a SQL statement that will show a count of schemas, tables and columns(do not include views) in the AdventureWorks database.
+Ans)
+Select COUNT(distinct s.name) as SchemaName, COUNT(distinct t.name) as TableName, COUNT(distinct c.name) as ColumnName
+From sys.tables t 
+INNER JOIN sys.columns c on c.object_id = t.object_id
+INNER JOIN sys.schemas s on s.schema_id = t.schema_id;
+
+Select COUNT(DISTINCT table_schema) as SchemaName,
+COUNT(DISTINCT table_name) as TableName,
+COUNT(column_name) as ColumnName
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE table_name not in( Select DISTINCT TABLE_NAME 
+From INFORMATION_SCHEMA.VIEWS);
+
+b./*Write a similar statement as part a but list each schema, table, and column(do not include views).This table can be used later in the course.*/
+Ans)
+Select s.name as SchemaName, t.name as TableName, 
+c.name as ColumnName 
+From sys.tables t 
+INNER JOIN sys.columns c on c.object_id = t.object_id
+INNER JOIN sys.schemas s on s.schema_id = t.schema_id;
+
+Select table_schema as SchemaName, 
+table_name as TableName, column_name as ColumnName
+From INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME not in(Select DISTINCT TABLE_NAME
+FROM INFORMATION_SCHEMA.VIEWS);
