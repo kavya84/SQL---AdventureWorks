@@ -1,0 +1,19 @@
+--Q. How many items with ListPrice more than $1000 have been sold?
+SELECT COUNT(SalesOrderID) Total 
+FROM Sales.SalesOrderDetail s JOIN Production.Product p ON s.ProductID = p.ProductID
+WHERE ListPrice > 1000;
+
+# AdventureWorks Medium Questions
+
+A "Single Item Order" is a customer order where only one item is ordered.
+
+Q. Show the SalesOrderID and the UnitPrice for every Single Item Order.
+*/
+
+SELECT
+  SalesOrderID,
+  UnitPrice
+FROM
+  Sales.SalesOrderDetail
+WHERE
+  OrderQty = 1;
